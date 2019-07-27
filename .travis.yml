@@ -4,11 +4,9 @@
 
   before_install:
     - docker build -t asankar/react-test -f ./client/Dockerfile.dev ./client
-    - {{docker build myother project}}
 
   script:
     - docker run asankar/react-test npm test -- --coverage
-    - {{docker run myotherproject runmytests}}
 
   after_success:
     - docker build -t asankar/multi-client ./client
