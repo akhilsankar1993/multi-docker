@@ -14,11 +14,11 @@
     - docker build -t asankar/multi-worker ./worker
     - docker build -t asankar/multi-nginx  ./nginx
 
-  # log into docker CLI
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+    # log into docker CLI
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
-  # take these images and push them to docker hub
-  - docker push asankar/multi-client
-  - docker push asankar/multi-server
-  - docker push asankar/multi-worker
-  - docker push asankar/multi-nginx
+    # take these images and push them to docker hub
+    - docker push asankar/multi-client
+    - docker push asankar/multi-server
+    - docker push asankar/multi-worker
+    - docker push asankar/multi-nginx
