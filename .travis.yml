@@ -1,0 +1,26 @@
+  sudo: required
+  services:
+    - docker
+
+  before_install:
+    - docker build -t asankar/react-test -f ./client/Dockerfile.dev ./client
+    - {{docker build myother project}}
+
+  script:
+    - docker run asankar/react-test npm test -- --coverage
+    - {{docker run myotherproject runmytests}}
+
+  after_success:
+    - docker build -t asankar/multi-client ./client
+    - docker build -t asankar/multi-server ./server
+    - docker build -t asankar/multi-worker ./worker
+    - docker build -t asankar/multi-nginx  ./nginx
+
+  # log into docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+  # take these images and push them to docker hub
+  - docker push asankar/multi-client
+  - docker push asankar/multi-server
+  - docker push asankar/multi-worker
+  - docker push asankar/multi-nginx
