@@ -22,3 +22,16 @@
     - docker push asankar/multi-server
     - docker push asankar/multi-worker
     - docker push asankar/multi-nginx
+
+  deploy:
+    provider: elasticbeanstalk
+    region: ap-south-1
+    app: multi-docker
+    env: Multidocker-env
+    bucket_name: elasticbeanstalk-ap-south-1-315540208539
+    bucket_path: docker-multi
+    on:
+      branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key:
+      secure: $AWS_SECRET_KEY
